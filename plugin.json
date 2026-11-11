@@ -1,9 +1,27 @@
 {
-    "author":  {
-                   "name":  "Mola-maker"
-               },
-    "description":  "DSH Mstack integration plugin.",
-    "name":  "dsh-mstack",
+    "main":  "dist/index.js",
+    "id":  "dsh-mstack",
+    "inject":  [
+                   "skills"
+               ],
     "version":  "1.0.0",
-    "repository":  "https://github.com/Mola-maker/dsh-mstack"
+    "category":  "workflow",
+    "description":  "Bundle 16 mstack workflow skills (m-start, m-plan, m-goal, m-team, etc.) into DeepSeek Harness.",
+    "author":  "Mola-maker",
+    "name":  "@mola/dsh-mstack",
+    "keywords":  [
+                     "mstack",
+                     "skills",
+                     "workflow",
+                     "orchestration",
+                     "agent-loop"
+                 ],
+    "config":  {
+                   "skillsRoot":  {
+                                      "type":  "string",
+                                      "description":  "Custom skills assets path (optional)"
+                                  }
+               },
+    "repository":  "https://github.com/Mola-maker/dsh-mstack",
+    "title":  "mstack Workflow Skills"
 }
