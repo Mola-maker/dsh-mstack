@@ -1,8 +1,8 @@
 {
     "peerDependencies":  {
-                             "@deepseek-ai/schemastery":  "\u003e=3.0.0",
-                             "@deepseek-ai/dsh-skill":  "*",
-                             "@deepseek-ai/cordis":  "\u003e=3.0.0"
+                             "@deepseek-ai/cordis":  "^4.1.0",
+                             "@deepseek-ai/dsh-skill":  "^0.0.1-rc.1",
+                             "@deepseek-ai/schemastery":  "^3.19.0"
                          },
     "version":  "1.0.0",
     "license":  "MIT",
@@ -13,7 +13,7 @@
                   "README.md"
               ],
     "dependencies":  {
-                         "yaml":  "^2.6.0"
+                         "yaml":  "^2.9.1"
                      },
     "types":  "dist/index.d.ts",
     "name":  "@mola/dsh-mstack",
@@ -27,8 +27,12 @@
                        "url":  "https://github.com/Mola-maker/dsh-mstack.git"
                    },
     "devDependencies":  {
-                            "@types/node":  "^22.0.0",
-                            "typescript":  "^5.6.0"
+                            "@types/node":  "^22.20.5",
+                            "typescript":  "^5.9.3"
                         },
-    "main":  "dist/index.js"
+    "main":  "dist/index.js",
+    "exports":  {
+                    ".":  "./dist/index.js",
+                    "./client":  "./dist/client/index.js"
+                }
 }

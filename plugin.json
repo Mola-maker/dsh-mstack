@@ -23,5 +23,8 @@
                                   }
                },
     "repository":  "https://github.com/Mola-maker/dsh-mstack",
-    "title":  "mstack Workflow Skills"
+    "title":  "mstack Workflow Skills",
+    "client":  {
+                   "main":  "dist/client/index.js"
+               }
 }
