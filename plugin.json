@@ -1,0 +1,9 @@
+{
+    "author":  {
+                   "name":  "Mola-maker"
+               },
+    "description":  "DSH Mstack integration plugin.",
+    "name":  "dsh-mstack",
+    "version":  "1.0.0",
+    "repository":  "https://github.com/Mola-maker/dsh-mstack"
+}
