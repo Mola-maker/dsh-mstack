@@ -1,0 +1,29 @@
+{
+    "indexes":  [
+                    {
+                        "defaultVersion":  "1.0.0",
+                        "id":  "dsh-mstack",
+                        "category":  "workflow",
+                        "description":  "Mola-maker\u0027s personal agent workflow stack: 16 skills distilled from superpowers, gstack, pstack and oh-my-claudecode.",
+                        "author":  "Mola-maker",
+                        "name":  "@mola/dsh-mstack",
+                        "keywords":  [
+                                         "skills",
+                                         "workflow",
+                                         "agents",
+                                         "mstack",
+                                         "dsh"
+                                     ],
+                        "versions":  [
+                                         {
+                                             "date":  "2026-11-10T23:10:35Z",
+                                             "target":  "github:Mola-maker/dsh-mstack#master",
+                                             "version":  "1.0.0"
+                                         }
+                                     ],
+                        "repository":  "https://github.com/Mola-maker/dsh-mstack",
+                        "title":  "mstack Workflow Skills"
+                    }
+                ],
+    "schemaVersion":  1
+}
