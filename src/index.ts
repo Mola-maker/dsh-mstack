@@ -8,6 +8,7 @@ import type { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
 import { BUNDLED_SKILL_RANK, type SkillCandidate, type SkillProvider } from '@deepseek-ai/dsh-skill'
 import { parse as parseYaml } from 'yaml'
+import { type StatusService, watchStatus } from './tui.js'
 
 /** Plugin configuration for dsh-mstack. */
 export interface Config {
@@ -17,7 +18,8 @@ export interface Config {
 
 /** Config schema. */
 export const Config: z<Config> = z.object({
-  skillsRoot: z.string().optional(),
+  // schemastery object keys are optional unless marked required
+  skillsRoot: z.string(),
 })
 
 /** Cordis Loader plugin identity. */
@@ -95,4 +97,10 @@ export function apply(ctx: Context, config: Config = {}): void {
 
   ctx.skills.registerProvider(() => provider)
   ctx.logger('dsh-mstack').info(`Registered ${candidates.length} mstack skills from ${skillsRoot}`)
+
+  // dsh-TUI: mstack's state in the footer. Only where the TUI's status service exists (not in the web profile).
+  ctx.inject(['tuiStatus'], (tuiCtx) => {
+    const status = (tuiCtx as unknown as { tuiStatus: StatusService }).tuiStatus
+    tuiCtx.effect(() => watchStatus(status, process.cwd()), 'mstack footer field')
+  })
 }

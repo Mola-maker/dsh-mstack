@@ -36,7 +36,7 @@ Add the plugin to your active DSH profile patch (e.g. `cordis.patch.yml`):
 
 ```yaml
 - id: dsh-mstack
-  name: "@mola/dsh-mstack"
+  name: "@molamaker/dsh-mstack"
   config: {}
 ```
 

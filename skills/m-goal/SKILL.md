@@ -2,6 +2,7 @@
 name: m-goal
 description: "Long-running goal loop: goal file, checkpoints, stop rules, mandatory closeout. Use for run-until-done work, 别停/一直做到完成."
 whenToUse: "When work spans many steps or sessions and must keep going to a defined outcome without stalling on the human, and always ends by writing a closeout section in the goal file."
+when_to_use: "When work spans many steps or sessions and must keep going to a defined outcome without stalling on the human, and always ends by writing a closeout section in the goal file."
 ---
 
 # m-goal — 长跑目标循环
@@ -16,7 +17,7 @@ Use for "keep going until done", multi-phase or multi-session work, or anything 
 
 Using m-goal: <one-line objective> — say this first, before any tool call.
 
-**Iron Law: NO `done` STATUS WITHOUT A WRITTEN CLOSEOUT, A PASSING GATE, AND AT LEAST THE MINIMUM ROUNDS.**
+**Rule: no `done` status without a written closeout, a passing gate, and at least the minimum rounds.**
 No exceptions: do not write the closeout "after one more try", in a second file, or from memory of the run; do not loosen a criterion to reach it (amend it, step 6); do not stop on a first lucky pass; do not replace the counter script with your recollection.
 
 | You will be tempted to think… | Reality |
@@ -30,7 +31,7 @@ No exceptions: do not write the closeout "after one more try", in a second file,
 
 Red flags — you are breaking the skill now: you typed "done" with no `## Closeout` status line; the state file's `rounds` is below the minimum and you are writing `done`; you are on a fourth attempt at the same signature; you rewrote a checkpoint row; you edited an acceptance line in place.
 
-1. **Write the goal file.** Create `.mstack/goals/<slug>.md` (layout: `references/goal-file-format.md`) containing: the objective in one testable sentence, the ordered sub-goals (outcome first), each sub-goal's acceptance criteria, the per-task attempt cap, the **minimum rounds** (default 3; a number you set before starting), the stop conditions, and empty `## Amendments` / `## Closeout` placeholders. Break the brief into the smallest sub-goals that each end in a check (principle 3). Then, before the first edit: save the m-verify baseline — run the suite once and write one signature line per already-failing test to `.mstack/verify/baseline.txt` (format in `m-verify`'s `references/verify-gates.md`; a green suite means an empty file) — and record the commit that baseline belongs to:
+1. **Write the goal file.** Create `.mstack/goals/<slug>.md` (layout: `references/goal-file-format.md`) containing: the objective in one testable sentence, the ordered sub-goals (outcome first), each sub-goal's acceptance criteria, the per-task attempt cap, the **minimum rounds** (default 3; a number you set before starting), the stop conditions, the `Boundaries` line (what the run may touch) and the `Output & approver` line (where the result lands, who approves irreversible actions), and empty `## Amendments` / `## Closeout` placeholders. A goal that repeats one action over many items runs 3 items first, reads the results, then runs the rest. Break the brief into the smallest sub-goals that each end in a check (principle 3). Then, before the first edit: save the m-verify baseline — run the suite once and write one signature line per already-failing test to `.mstack/verify/baseline.txt` (format in `m-verify`'s `references/verify-gates.md`; a green suite means an empty file) — and record the commit that baseline belongs to:
    `node "<this skill dir>/scripts/goal-state.mjs" init .mstack/goals <slug> --start-commit <sha> --min-rounds <N>`
    `<this skill dir>` is the directory this SKILL.md was loaded from (Claude Code shows it as the skill base directory). If the script cannot be found, do this step by hand and say so in the report. `<sha>` is `git rev-parse HEAD`, or `none` when the repo has no commits.
 2. **Order by risk.** Architectural decisions and core abstractions first, integration points next, spikes/unknowns, then polish last — fail fast on risky work.

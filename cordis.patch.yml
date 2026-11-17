@@ -1,0 +1,8 @@
+# dsh-mstack bundle patch: mount the plugin as a profile row.
+# `dsh plugin --profile <name> add @molamaker/dsh-mstack` installs the package; because package.json declares
+# `dsh.bundle.patch`, this row joins the profile. It registers mstack's skills, and in dsh-TUI it also shows
+# mstack's state in the footer (verify verdict, runs that wait for you). Override the row's config by id in the
+# profile's own cordis.patch.yml; do not insert a second row with this id.
+- insert:
+    - id: dsh-mstack
+      name: '@molamaker/dsh-mstack'

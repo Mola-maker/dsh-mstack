@@ -4,11 +4,11 @@
   "inject": [
     "skills"
   ],
-  "version": "1.0.0",
+  "version": "1.1.0",
   "category": "workflow",
-  "description": "Bundle 16 mstack workflow skills (m-start, m-plan, m-goal, m-team, etc.) into DeepSeek Harness.",
+  "description": "Bundle 17 mstack workflow skills (m-start, m-plan, m-goal, m-team, m-cua, etc.) into DeepSeek Harness.",
   "author": "Mola-maker",
-  "name": "@mola/dsh-mstack",
+  "name": "@molamaker/dsh-mstack",
   "keywords": [
     "mstack",
     "skills",

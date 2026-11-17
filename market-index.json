@@ -6,7 +6,7 @@
                         "category":  "workflow",
                         "description":  "Mola-maker\u0027s personal agent workflow stack: 16 skills distilled from superpowers, gstack, pstack and oh-my-claudecode.",
                         "author":  "Mola-maker",
-                        "name":  "@mola/dsh-mstack",
+                        "name":  "@molamaker/dsh-mstack",
                         "keywords":  [
                                          "skills",
                                          "workflow",

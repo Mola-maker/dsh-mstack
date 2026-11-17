@@ -2,6 +2,7 @@
 name: m-plan
 description: "Turn a design into ordered, verifiable steps with an independent critic pass. Use before coding, 拆任务/做计划/先规划."
 whenToUse: "When a design spec exists (from m-think) or a detailed request is ready, and you need a step-by-step, independently-checked implementation plan."
+when_to_use: "When a design spec exists (from m-think) or a detailed request is ready, and you need a step-by-step, independently-checked implementation plan."
 ---
 
 # m-plan — 把设计拆成可验证的步骤
@@ -16,7 +17,7 @@ Use when `m-think` has produced an approved spec, or the request is detailed eno
 
 Using m-plan: <one-line purpose> — say this first, before any tool call.
 
-**Iron Law: NO HANDOFF TO `m-dispatch` UNTIL A DIFFERENT AGENT HAS CRITIQUED THE PLAN, ONCE.**
+**Rule: no handoff to `m-dispatch` until a different agent has critiqued the plan, once.**
 No exceptions: your own re-read is not the critic; a second critic round is not allowed either; do not hand off "pending" findings, and do not start coding to "test" the plan.
 
 | You will be tempted to think… | Reality |
