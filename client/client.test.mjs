@@ -62,11 +62,14 @@ test("apply puts a status line beside the session title and a tab beside Chat", 
 
 test("the console address: default, a loopback override, and anything else ignored", () => {
   const { exports } = load();
-  assert.equal(exports.consoleBase(undefined), "http://127.0.0.1:7333");
-  assert.equal(exports.consoleBase(store("http://127.0.0.1:7400/")), "http://127.0.0.1:7400");
-  assert.equal(exports.consoleBase(store("http://localhost:7401")), "http://localhost:7401");
-  for (const bad of ["https://evil.example", "http://192.168.1.5:7333", "javascript:alert(1)", "http://127.0.0.1:7333/x"]) assert.equal(exports.consoleBase(store(bad)), "http://127.0.0.1:7333", bad);
-  assert.equal(exports.consoleBase({ getItem: () => { throw new Error("blocked"); } }), "http://127.0.0.1:7333");
+  const base = (v) => JSON.stringify(exports.consoleBase(v));
+  const def = JSON.stringify({ origin: "http://127.0.0.1:7333", query: "" });
+  assert.equal(base(undefined), def);
+  assert.equal(base(store("http://127.0.0.1:7400/")), JSON.stringify({ origin: "http://127.0.0.1:7400", query: "" }));
+  assert.equal(base(store("http://localhost:7401")), JSON.stringify({ origin: "http://localhost:7401", query: "" }));
+  assert.equal(base(store("http://127.0.0.1:7333/?token=abc_DEF-1")), JSON.stringify({ origin: "http://127.0.0.1:7333", query: "?token=abc_DEF-1" }));
+  for (const bad of ["https://evil.example", "http://192.168.1.5:7333", "javascript:alert(1)", "http://127.0.0.1:7333/x", "http://127.0.0.1:7333/?token=a\"b", "http://127.0.0.1:7333/?token=a&x=1"]) assert.equal(base(store(bad)), def, bad);
+  assert.equal(base({ getItem: () => { throw new Error("blocked"); } }), def);
 });
 
 test("before the probe answers nothing shows; up shows the console; down says how to start it", async () => {
@@ -92,6 +95,18 @@ test("before the probe answers nothing shows; up shows the console; down says ho
   assert.equal(off.type, "span");
   assert.match(off.props.title, /mola web/);
   const view = down.exports.ConsoleView();
+  // before the first answer the tab shows nothing (no flash of the browser's error page)
+  const fresh = load({ fetchImpl: () => new Promise(() => undefined) });
+  assert.equal(fresh.exports.ConsoleView(), null);
   assert.equal(view.type, "div");
   assert.ok(JSON.stringify(view).includes("mola web"));
+});
+
+test("a token in the address reaches both pages", async () => {
+  const { exports, React } = load({ storage: store("http://127.0.0.1:7333/?token=t0k") });
+  exports.StatusChip();
+  React.state.effects[0]();
+  await new Promise((r) => setTimeout(r, 0));
+  assert.equal(exports.StatusChip().props.src, "http://127.0.0.1:7333/embed?token=t0k");
+  assert.equal(exports.ConsoleView().props.src, "http://127.0.0.1:7333/?token=t0k");
 });
