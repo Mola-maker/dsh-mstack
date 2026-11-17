@@ -1,38 +1,48 @@
 {
-    "peerDependencies":  {
-                             "@deepseek-ai/cordis":  "^4.1.0",
-                             "@deepseek-ai/dsh-skill":  "^0.0.1-rc.1",
-                             "@deepseek-ai/schemastery":  "^3.19.0"
-                         },
-    "version":  "1.0.0",
-    "license":  "MIT",
-    "files":  [
-                  "dist",
-                  "skills",
-                  "plugin.json",
-                  "README.md"
-              ],
-    "dependencies":  {
-                         "yaml":  "^2.9.1"
-                     },
-    "types":  "dist/index.d.ts",
-    "name":  "@mola/dsh-mstack",
-    "type":  "module",
-    "description":  "DeepSeek Harness plugin: bundle mstack workflow skills and tools",
-    "scripts":  {
-                    "build":  "tsc -b"
-                },
-    "repository":  {
-                       "type":  "git",
-                       "url":  "https://github.com/Mola-maker/dsh-mstack.git"
-                   },
-    "devDependencies":  {
-                            "@types/node":  "^22.20.5",
-                            "typescript":  "^5.9.3"
-                        },
-    "main":  "dist/index.js",
-    "exports":  {
-                    ".":  "./dist/index.js",
-                    "./client":  "./dist/client/index.js"
-                }
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.1.0",
+    "@deepseek-ai/dsh-skill": "^0.0.1-rc.1",
+    "@deepseek-ai/schemastery": "^3.19.0"
+  },
+  "version": "1.0.0",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "skills",
+    "plugin.json",
+    "README.md",
+    "client/client.js"
+  ],
+  "dependencies": {
+    "yaml": "^2.9.1"
+  },
+  "types": "dist/index.d.ts",
+  "name": "@mola/dsh-mstack",
+  "type": "module",
+  "description": "DeepSeek Harness plugin: bundle mstack workflow skills and tools",
+  "scripts": {
+    "build": "tsc -b",
+    "test": "node --test client/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mola-maker/dsh-mstack.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  },
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./client": "./client/client.js"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
 }

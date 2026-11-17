@@ -53,3 +53,20 @@ Point your Loader or Cordis preset directly to the local directory:
 ## License
 
 MIT © [Mola-maker](https://github.com/Mola-maker)
+
+## mstack in the DSH web client
+
+The plugin's browser half (`client/client.js`) adds two things to every session:
+
+- **beside the session title**: a one-line status from mstack: the last verify verdict, environment gaps, runs that wait for you;
+- **an `mstack` tab** beside Chat: the mola console (approve, deny, stop, start a run, check the environment again).
+
+Both embed the `mola web` console, so DSH, the console in a browser and `mola tui` always show the same state. Start it once in a terminal:
+
+```sh
+mola web            # http://127.0.0.1:7333
+```
+
+When it is not running, the status says "mstack 未连接" and the tab says how to start it. Another port: run `localStorage.setItem("mstack.console", "http://127.0.0.1:<port>")` in the browser console (only loopback addresses are accepted).
+
+The bundle is written by hand in DSH's client module format, so it needs no DSH checkout to build. `npm test` loads it the way DSH's loader does, against a stand-in React.
