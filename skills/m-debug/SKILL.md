@@ -2,6 +2,7 @@
 name: m-debug
 description: "Root-cause a bug or failing test: reproduce, competing hypotheses, regression test. Use for debug一下/为什么报错/这个测试挂了."
 whenToUse: "A test fails, code errors, output is wrong, or a build is broken — before any edit that claims to fix it."
+when_to_use: "A test fails, code errors, output is wrong, or a build is broken — before any edit that claims to fix it."
 ---
 
 # m-debug
@@ -19,7 +20,7 @@ Do NOT use it to fix a bug you haven't reproduced, or to change code before know
 First line you say: `Using m-debug: find the first wrong state, then fix it there.`
 
 ```
-NO EDIT THAT CLAIMS TO FIX THE BUG UNTIL YOU HAVE A ROOT CAUSE AND A RED REPRO.
+No edit that claims to fix the bug until you have a root cause and a red repro.
 ```
 
 Closed loopholes: "quick fix now, investigate later", "change X and see", a fix that only moves the error to another file, and a guess you have not written down all count as breaking this rule. Finish a phase before starting the next, and write its exit line in your working notes:

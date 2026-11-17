@@ -31,7 +31,7 @@ function load({ storage, fetchImpl } = {}) {
     clearInterval: () => {},
   };
   vm.runInNewContext(SOURCE, sandbox, { filename: "client.js" });
-  assert.equal(registration.id, "@mola/dsh-mstack");
+  assert.equal(registration.id, "@molamaker/dsh-mstack");
   const required = [];
   const exports = registration.factory((spec) => { required.push(spec); if (spec === "react") return React; throw new Error("unexpected require " + spec); });
   return { exports, React, required, timers };

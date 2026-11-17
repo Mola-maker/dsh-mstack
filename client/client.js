@@ -1,4 +1,4 @@
-// @mola/dsh-mstack browser half: mstack's state inside the DeepSeek Harness web client.
+// @molamaker/dsh-mstack browser half: mstack's state inside the DeepSeek Harness web client.
 //
 //  - beside every session's title, a compact status line (verify verdict, environment gaps, runs that wait for you)
 //  - a "mstack" tab beside Chat, holding the mola console (approve, deny, stop, start a run, check again)
@@ -9,7 +9,7 @@
 //
 // Hand-written in DSH's client bundle format (window.__ModuleLoader__.load with a factory that receives the
 // module-table require), so it needs no DSH checkout to build. React comes from DSH's module table.
-window.__ModuleLoader__.load({ id: "@mola/dsh-mstack", factory: (require) => {
+window.__ModuleLoader__.load({ id: "@molamaker/dsh-mstack", factory: (require) => {
 var module = { exports: {} }; var exports = module.exports;
 const React = require("react");
 const h = React.createElement;
