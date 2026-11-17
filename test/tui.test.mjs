@@ -66,6 +66,11 @@ test('watchStatus writes on change only, clears when mstack leaves nothing, and 
   run(cwd, 'go-1', { status: 'blocked' })
   tick()
   assert.equal(calls.length, 2)
-  stop()
+  // a change releases the previous write's cleanup, so they do not pile up
+  run(cwd, 'go-2', { status: 'running' })
+  tick()
+  assert.equal(calls.length, 3)
   assert.equal(cleared, 2)
+  stop()
+  assert.equal(cleared, 3)
 })

@@ -8,7 +8,7 @@
  * Pure functions here; `watchStatus` is the timer the plugin mounts when the TUI's `tuiStatus` service exists.
  */
 
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 
 export type Tone = 'dim' | 'accent' | 'success' | 'warning' | 'error'
@@ -61,17 +61,13 @@ function runsOf(cwd: string): { blocked: number; running: number; reason?: strin
   } catch {
     return { blocked: 0, running: 0 }
   }
+  // run ids start with their start time (`go-YYYYMMDD-HHMM-xxxx`), so the newest 50 are the last 50 by name:
+  // no stat of every folder on each tick. Folders named otherwise sort first and are read only while few.
   const recent = names
-    .map((n) => {
-      try {
-        return { n, t: statSync(join(dir, n, 'progress.json')).mtimeMs }
-      } catch {
-        return null
-      }
-    })
-    .filter((x): x is { n: string; t: number } => x !== null)
-    .sort((a, b) => b.t - a.t)
-    .slice(0, 50)
+    .filter((n) => !n.startsWith('.'))
+    .sort()
+    .slice(-50)
+    .map((n) => ({ n }))
   let blocked = 0
   let running = 0
   let reason: string | undefined
@@ -149,7 +145,10 @@ export function watchStatus(status: StatusService, cwd: string, everyMs = 3000, 
       clear = undefined
       return
     }
+    // each write registers its own cleanup with the TUI; release the previous one so they do not pile up
+    const prev = clear
     clear = status.setField('mstack', f.text, { slot: 'right-head', tone: f.tone, maxCells: 32, minColumns: 70, detail: f.detail })
+    prev?.()
   }
   tick()
   const timer = timers.setInterval(tick, everyMs)
